@@ -89,7 +89,7 @@ public class EmployeeController {
 	}
 	
 	@ApiOperation(
-			value = " delet dat",
+			value = " delete data",
 			notes = "Return data with JSON", 
 			tags ="Data Manipulation API"
 			)
