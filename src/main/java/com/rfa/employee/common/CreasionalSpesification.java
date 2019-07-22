@@ -1,19 +1,15 @@
 package com.rfa.employee.common;
 
 import java.io.Serializable;
-import javax.persistence.Inheritance;
 import java.util.Date;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
 @Embeddable
-@Inheritance
 public class CreasionalSpesification implements Serializable {
 
 	private String createdBy;
