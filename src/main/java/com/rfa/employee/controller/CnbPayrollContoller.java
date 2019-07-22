@@ -1,5 +1,6 @@
 package com.rfa.employee.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,26 +23,36 @@ import com.rfa.employee.model.CnbPayroll;
 import com.rfa.employee.repository.CnbPayrollRepository;
 
 @RestController
-@RequestMapping("api/v1")
-
+@RequestMapping("api/v2")
 public class CnbPayrollContoller {
 	
 	
 	@Autowired
-	private CnbPayrollRepository cnbPayrollRepository;
+	CnbPayrollRepository cnbPayrollRepository;
 	
-	@GetMapping("ent")
-	public List<CnbPayroll> getAllCNB() {
+	@GetMapping("cnb")
+	public List<CnbPayroll> getAllCnbPayroll() {
+	
+//		List<CnbPayroll> cnbPayrollList= new ArrayList<>();
+//		cnbPayrollRepository.findAll().forEach(System.out::println);
 		return cnbPayrollRepository.findAll();
 		
 		
 	}
 	@PostMapping(value = "/cnbsave")
 	public CnbPayroll save(@RequestBody CnbPayroll cnbPayroll) {
-		return cnbPayrollRepository.save(cnbPayroll);
+		CnbPayroll result = new CnbPayroll();
+		result.setId(cnbPayroll.getId());
+		result.setCreasionalSpesification(cnbPayroll.getCreasionalSpesification());
+		result.setInsentif(cnbPayroll.getInsentif());
+		result.setPayrollID(cnbPayroll.getPayrollID());
+		result.setPayrollNotes(cnbPayroll.getPayrollNotes());
+		result.setPayrollPeriod(cnbPayroll.getPayrollPeriod());
+		System.out.println(result);
+		return cnbPayrollRepository.save(result);
 	
 	}
-	@PutMapping(value = "cnb/{id}") 
+	@PutMapping(value = "/cnb/{id}") 
 	public ResponseEntity<CnbPayroll>UpdatecnbPayroll(@Valid @RequestBody CnbPayroll cnbPayrollRequest, @PathVariable(value = "id") Long cnbpayrollId) throws DataNotFoundException {
 		CnbPayroll cnbPayroll = cnbPayrollRepository.findById(cnbpayrollId)
 				.orElseThrow(() -> new DataNotFoundException("Employee not found for this id ::" + cnbpayrollId));
@@ -56,7 +67,7 @@ public class CnbPayrollContoller {
 		
 	return ResponseEntity.ok().body(updateCnbPayroll);
 	}
-	@DeleteMapping("ent/{id}")
+	@DeleteMapping("/cnb/{id}")
 	public Map<String, Boolean> deleteCnbPayroll(@PathVariable(value = "id") Long cnbPayrollId)
 		throws DataNotFoundException {
 		CnbPayroll cnbPayroll = cnbPayrollRepository.findById(cnbPayrollId)

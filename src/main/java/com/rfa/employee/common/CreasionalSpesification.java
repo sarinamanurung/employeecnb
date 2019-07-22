@@ -1,6 +1,7 @@
 package com.rfa.employee.common;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Embeddable;
@@ -11,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Embeddable
 public class CreasionalSpesification implements Serializable {
+	
+	protected CreasionalSpesification(){}
 
 	private String createdBy;
 	private String updateBy;
@@ -23,6 +26,7 @@ public class CreasionalSpesification implements Serializable {
 	
 	
 	public CreasionalSpesification(String createdBy, Date createdDate, String updateBy, Date updateDate) {
+		
 		this.createdBy = createdBy;
 		this.createdDate = createdDate;
 		this.updateBy = updateBy;
